@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}) {
   const [countries, setCountries] = useState([]);
@@ -33,14 +34,14 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
   }, []);
  
   const loadCountries = () => {
-    axios.get("http://localhost:5000/countries")
+    axios.get(`${API_BASE_URL}/countries`)
       .then(res => setCountries(res.data))
       .catch(err => console.log(err));
   };
 
   useEffect(() => {
     if (form.CountryID) {
-      axios.get(`http://localhost:5000/territories/${form.CountryID}`)
+      axios.get(`${API_BASE_URL}/territories/${form.CountryID}`)
         .then(res => setTerritories(res.data))
         .catch(err => console.log(err));
     } else {
@@ -53,7 +54,7 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
 
   useEffect(() => {
     if (form.TerritoryID) {
-      axios.get(`http://localhost:5000/districts/${form.TerritoryID}`)
+      axios.get(`${API_BASE_URL}/districts/${form.TerritoryID}`)
         .then(res => setDistricts(res.data))
         .catch(err => console.log(err));
     } else {
@@ -65,7 +66,7 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
 
   useEffect(() => {
     if (form.DistrictID) {
-      axios.get(`http://localhost:5000/seats/${form.DistrictID}`)
+      axios.get(`${API_BASE_URL}/seats/${form.DistrictID}`)
         .then(res => setSeats(res.data))
         .catch(err => console.log(err));
 
@@ -108,7 +109,7 @@ useEffect(()=>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/citizens", form)
+    axios.post(`${API_BASE_URL}/citizens`, form)
       .then(res => {
         alert(res.data.message);
         setForm({

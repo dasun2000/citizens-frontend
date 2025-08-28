@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import API_BASE_URL from "../config";
 
 function CitizensList({ districtID, seatID }) {
     const [citizens, setCitizens] = useState([]);
@@ -8,14 +9,14 @@ function CitizensList({ districtID, seatID }) {
 
     useEffect(() => {
         if (seatID) {
-            axios.get(`http://localhost:5000/citizens/seat/${seatID}`)
+            axios.get(`${API_BASE_URL}/citizens/seat/${seatID}`)
                 .then(res => {
                     setCitizens(res.data);
                     setCurrentView("seat");
                 })
                 .catch(err => console.error(err));
         } else if (districtID) {
-            axios.get(`http://localhost:5000/citizens/district/${districtID}`)
+            axios.get(`${API_BASE_URL}/citizens/district/${districtID}`)
                 .then(res => {
                     setCitizens(res.data);
                     setCurrentView("district");
