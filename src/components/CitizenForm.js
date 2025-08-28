@@ -216,7 +216,7 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
       return null;
     }
     
-     let title = `Add new ${modalType}`;
+    let title = `Add new ${modalType}`;
     let fields = [];
     
     if (modalType === "country") {
@@ -226,21 +226,21 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
       ];
     } else if (modalType === "territory") {
       fields = [
-        {name: "CountryID", label: "Country ID", type: "number", required: true, value: form.CountryID},
+        {name: "CountryID", label: "Country", type: "select", required: true, options: countries, optionValue: "ID", optionLabel: "CountryName"},
         {name: "TerritoryName", label: "Territory Name", type: "text", required: true},
         {name: "TerritoryShortName", label: "Short Name", type: "text", required: true}
       ];
     } else if (modalType === "district") {
       fields = [
-        {name: "CountryID", label: "Country ID", type: "number", required: true, value: form.CountryID},
-        {name: "TerritoryID", label: "Territory ID", type: "number", required: true, value: form.TerritoryID},
+        {name: "CountryID", label: "Country", type: "select", required: true, options: countries, optionValue: "ID", optionLabel: "CountryName"},
+        {name: "TerritoryID", label: "Territory", type: "select", required: true, options: territories, optionValue: "ID", optionLabel: "TerritoryName"},
         {name: "DistrictName", label: "District Name", type: "text", required: true}
       ];
     } else if (modalType === "seat") {
       fields = [
-        {name: "CountryID", label: "Country ID", type: "number", required: true, value: form.CountryID},
-        {name: "TerritoryID", label: "Territory ID", type: "number", required: true, value: form.TerritoryID},
-        {name: "DistricID", label: "District ID", type: "number", required: true, value: form.DistrictID},
+        {name: "CountryID", label: "Country", type: "select", required: true, options: countries, optionValue: "ID", optionLabel: "CountryName"},
+        {name: "TerritoryID", label: "Territory", type: "select", required: true, options: territories, optionValue: "ID", optionLabel: "TerritoryName"},
+        {name: "DistrictID", label: "District", type: "select", required: true, options: districts, optionValue: "ID", optionLabel: "DistrictName"},
         {name: "SeatDescption", label: "Seat Description", type: "text", required: true}
       ];
     }
@@ -251,9 +251,31 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
           <h3>{title}</h3>
           <form onSubmit={handleModalSubmit}>
             {fields.map(field => (
-              <div key={field.name} style={{marginBottom: "10px"}}>
-                <label>{field.label}: </label>
-                <input type={field.type} name={field.name} value={modalForm[field.name] || (field.value || "")} onChange={handleModalChange} required={field.required} disabled={field.value !== undefined}style={{width: "100%", padding: "5px"}}/>
+              <div key={field.name} style={{marginBottom: "15px"}}>
+                <label style={{display: "block", marginBottom: "5px", fontWeight: "bold"}}>
+                  {field.label}:
+                </label>
+                
+                {field.type === "select" ? (
+                  <select name={field.name}
+                    value={modalForm[field.name] || ""}
+                    onChange={handleModalChange}
+                    required={field.required}>
+                    <option value="">Select {field.label}</option>
+                    {field.options.map(option => (
+                      <option key={option[field.optionValue]} value={option[field.optionValue]}>
+                        {option[field.optionLabel]}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    value={modalForm[field.name] || ""}
+                    onChange={handleModalChange}
+                    required={field.required}/>
+                )}
               </div>
             ))}
           </form>
