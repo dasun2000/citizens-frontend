@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import API_BASE_URL from "../config";
+import axios from "axios";;
 
 function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}) {
   const [countries, setCountries] = useState([]);
@@ -27,7 +26,10 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
   });
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
- const [modalForm, setModalForm] = useState({});
+  const [modalForm, setModalForm] = useState({});
+  
+ 
+  const API_BASE_URL = "https://citizens-backend-production.up.railway.app";
   
   useEffect(() => {
     loadCountries();
@@ -78,29 +80,29 @@ function CitizenForm({ onDistrictChange ,onSeatChange,onAllSelected,onSelection}
     }
   }, [form.DistrictID, onDistrictChange]);
 
-useEffect(()=>{
-  if(form.SeatID && onSeatChange){
-    onSeatChange(form.SeatID);
-  }
-  else if(onSeatChange){
-    onSeatChange("");
-  }
-},[form.SeatID,onSeatChange]);
+  useEffect(()=>{
+    if(form.SeatID && onSeatChange){
+      onSeatChange(form.SeatID);
+    }
+    else if(onSeatChange){
+      onSeatChange("");
+    }
+  },[form.SeatID,onSeatChange]);
 
-useEffect(()=>{
-  if(form.CountryID && form.TerritoryID && form.DistrictID && form.SeatID){
-    if(onAllSelected)onAllSelected(true);
-    if(onSelection)onSelection({
-      countryId:form.CountryID,
-      territoryId:form.TerritoryID,
-      districtId:form.DistrictID,
-      seatId:form.SeatID
-    });
-  }
-  else{
-    if(onAllSelected)onAllSelected(false);
-  }
-},[form.CountryID,form.TerritoryID,form.DistrictID,form.SeatID,onAllSelected,onSelection]);
+  useEffect(()=>{
+    if(form.CountryID && form.TerritoryID && form.DistrictID && form.SeatID){
+      if(onAllSelected)onAllSelected(true);
+      if(onSelection)onSelection({
+        countryId:form.CountryID,
+        territoryId:form.TerritoryID,
+        districtId:form.DistrictID,
+        seatId:form.SeatID
+      });
+    }
+    else{
+      if(onAllSelected)onAllSelected(false);
+    }
+  },[form.CountryID,form.TerritoryID,form.DistrictID,form.SeatID,onAllSelected,onSelection]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -171,13 +173,13 @@ useEffect(()=>{
 
     let url = "";
     if (modalType === "country") {
-      url = "http://localhost:5000/countries";
+      url = `${API_BASE_URL}/countries`;
     } else if (modalType === "territory") {
-      url = "http://localhost:5000/territories";
+      url = `${API_BASE_URL}/territories`;
     } else if (modalType === "district") {
-      url = "http://localhost:5000/districts";
+      url = `${API_BASE_URL}/districts`;
     } else if (modalType === "seat") {
-      url = "http://localhost:5000/seats";
+      url = `${API_BASE_URL}/seats`;
     }
     
     if (url) {
@@ -189,15 +191,15 @@ useEffect(()=>{
           if (modalType === "country") {
             loadCountries();
           } else if (modalType === "territory" && form.CountryID === modalForm.CountryID) {
-            axios.get(`http://localhost:5000/territories/${form.CountryID}`)
+            axios.get(`${API_BASE_URL}/territories/${form.CountryID}`)
               .then(res => setTerritories(res.data))
               .catch(err => console.log(err));
           } else if (modalType === "district" && form.TerritoryID === modalForm.TerritoryID) {
-            axios.get(`http://localhost:5000/districts/${form.TerritoryID}`)
+            axios.get(`${API_BASE_URL}/districts/${form.TerritoryID}`)
               .then(res => setDistricts(res.data))
               .catch(err => console.log(err));
           } else if (modalType === "seat" && form.DistrictID === modalForm.DistrictID) {
-            axios.get(`http://localhost:5000/seats/${form.DistrictID}`)
+            axios.get(`${API_BASE_URL}/seats/${form.DistrictID}`)
               .then(res => setSeats(res.data))
               .catch(err => console.log(err));
           }
