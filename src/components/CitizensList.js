@@ -22,7 +22,8 @@ function CitizensList({ districtID, seatID }) {
                     setCurrentView("district");
                 })
                 .catch(err => console.error(err));
-        } else {
+        }
+         else {
             setCitizens([]);
             setCurrentView("");
         }
