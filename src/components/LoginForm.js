@@ -54,7 +54,7 @@ const handleChange=(e)=>{
 
             
             {
-                error && (<div style={{color:"red", textAlign:"center"}}>{error}</div>
+                error && (<div style={{color:"red"}}>{error}</div>
            ) }
         </form>
         </div>
