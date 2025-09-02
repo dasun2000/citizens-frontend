@@ -50,7 +50,7 @@ const handleChange=(e)=>{
                 <label>Password:</label>
                 <input type="password" name="password" value={form.password} onChange={handleChange}  placeholder="Enter Password"required style={{padding:"8px"}}/>
             </div>
-                <button type="submit" style={{padding:"10px",backgroundColor:"blue",color:"white",width:"100%"}}>Login</button>
+                <button type="submit" style={{padding:"10px",backgroundColor:"blue",color:"white",width:"100px"}}>Login</button>
 
             
             {
