@@ -10,6 +10,7 @@ function App() {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedSeat,setSelectedSeat]=useState("");
   const [isLoggedIn,setLoggedIn]=useState(false);
+  
 
   const handleDistrictChange=(districtID)=>{
     setSelectedDistrict(districtID);
@@ -25,6 +26,11 @@ function App() {
     setLoggedIn(loginStatus);
     
   };
+  const handleLogout=()=>{
+    setLoggedIn(false);
+    setSelectedDistrict("");
+    setSelectedSeat("");
+  }
  
 
   if(!isLoggedIn){
@@ -34,6 +40,9 @@ function App() {
   return (
     <div className="app-container">
       <h1><center>Population Management System</center></h1>
+      <div >
+          <button onClick={handleLogout}>Logout</button>
+      </div>
       
       <CitizenForm onDistrictChange={handleDistrictChange} onSeatChange={handleSeatChange}/>
 
