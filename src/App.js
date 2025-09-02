@@ -41,7 +41,7 @@ function App() {
     <div className="app-container">
       <h1><center>Population Management System</center></h1>
       <div >
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} style={{pading :"8px 16px",backgroundColor:"red", color:"white",borderRadius:"5px",cursor:"pointer"}}>Logout</button>
       </div>
       
       <CitizenForm onDistrictChange={handleDistrictChange} onSeatChange={handleSeatChange}/>
