@@ -24,7 +24,7 @@ const handleSubmit=async(e)=>{
         }
     }
     catch(error){
-        if(error.response&&error.response.data){
+        if(error.response && error.response.data){
             setError(error.response.data.message||"login failed");
         }
         else
@@ -39,16 +39,16 @@ const handleChange=(e)=>{
 
     return(
         <div>
-        <form onSubmit={handleSubmit} style={{padding:"40px",borderRadius:"10px",maxWidth:"400px", border:"1px"}}>
+        <form onSubmit={handleSubmit} style={{padding:"40px",borderRadius:"10px",maxWidth:"400px", border:"1px solid #ddd", margin:"50px auto"}}>
             <h1>Population Managment System</h1>
             <h3>Login</h3>
             <div style={{marginBottom:"15px"}}>
                 <label>Username:</label>
-                <input type="text" name="username" value={form.username} onChange={handleChange} placeholder="Enter Username"required/>
+                <input type="text" name="username" value={form.username} onChange={handleChange} placeholder="Enter Username"required style={{padding:"8px"}}/>
             </div>
             <div  style={{marginBottom:"15px"}}>
                 <label>Password:</label>
-                <input type="password" name="password" value={form.password} onChange={handleChange}  placeholder="Enter Password"required/>
+                <input type="password" name="password" value={form.password} onChange={handleChange}  placeholder="Enter Password"required style={{padding:"8px"}}/>
             </div>
                 <button type="submit">Login</button>
 
