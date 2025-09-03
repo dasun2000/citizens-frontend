@@ -130,28 +130,28 @@ const CitizenAnalytics = () => {
         Full Citizen Count Analytics
       </h2>
       <div style={{ display: 'flex', gap: '10px',marginBottom: '20px',justifyContent: 'center'}}>
-        <button type='button'
+        <button type="button"
           onClick={() => setActiveTab('country')}
           style={{
             padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='country'?"blue":"#B2BEB5"}}>
           Countries ({data.countries.length})
         </button>
         
-        <button type='button'
+        <button type="button"
           onClick={() => setActiveTab('territory')}
           style={{
             padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='territory'?"blue":"#B2BEB5"}}>
           Territories ({data.territories.length})
         </button>
         
-        <button type='button'
+        <button type="button"
           onClick={() => setActiveTab('district')}
           style={{
             padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='district'?"blue":"#B2BEB5"}}>
           Districts ({data.districts.length})
         </button>
         
-        <button type='button'
+        <button type="button"
           onClick={() => setActiveTab('seat')}
           style={{
             padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='seat'?"blue":"#B2BEB5"}}>
@@ -213,7 +213,7 @@ const CitizenAnalytics = () => {
 
      
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <button 
+        <button type="button"
           onClick={loadAllData}
           style={{padding: '10px 20px',backgroundColor: 'black',color: 'white',border: 'none',borderRadius: '5px',cursor: 'pointer',}}>
            Refresh All Data
