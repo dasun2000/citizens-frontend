@@ -20,7 +20,6 @@ const CitizenAnalytics = () => {
   const loadCounts = async () => {
     setLoading(true);
     try {
-      // Get countries
       const countriesResponse = await axios.get(`${API_BASE_URL}/countries`);
       const countries = countriesResponse.data;
       
@@ -29,7 +28,6 @@ const CitizenAnalytics = () => {
       let districtCount = 0;
       let seatCount = 0;
 
-      // Count everything
       for (const country of countries) {
         const territories = await axios.get(`${API_BASE_URL}/territories/${country.ID}`);
         territoryCount += territories.data.length;
@@ -65,7 +63,7 @@ const CitizenAnalytics = () => {
   if (loading) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
-        <h2>Loading...</h2>
+        <h2>Loading Analytics...</h2>
       </div>
     );
   }
