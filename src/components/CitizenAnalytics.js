@@ -173,28 +173,28 @@ const CitizenAnalytics = () => {
         <button 
           onClick={() => setActiveTab('country')}
           style={{
-            padding: '10px 20px',backgroundColor: activeTab === 'country' ? 'blue' : '#f8f9fa',color: activeTab === 'country' ? 'white' : '#333',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
           Countries ({data.countries.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('territory')}
           style={{
-            padding: '10px 20px',backgroundColor: activeTab === 'territory' ? 'blue' : '#f8f9fa',color: activeTab === 'territory' ? 'white' : '#333',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
           Territories ({data.territories.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('district')}
           style={{
-            padding: '10px 20px',backgroundColor: activeTab === 'district' ? 'blue' : '#f8f9fa',color: activeTab === 'district' ? 'white' : '#333',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
           Districts ({data.districts.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('seat')}
           style={{
-            padding: '10px 20px',backgroundColor: activeTab === 'seat' ? 'blue' : '#f8f9fa',color: activeTab === 'seat' ? 'white' : '#333',border: '1px solid #ddd',borderRadius: '5px',cursor: 'pointer' }}>
+            padding: '10px 20px',border: '1px solid #ddd',borderRadius: '5px',cursor: 'pointer' }}>
           Seats ({data.seats.length})
         </button>
       </div>
@@ -218,7 +218,7 @@ const CitizenAnalytics = () => {
         </h3>
         
         <div style={{ overflowX: 'auto' }}>
-          <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
+       <center >  <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
           }}>
             <thead>
               <tr style={{ backgroundColor: '#f8f9fa' }}>
@@ -237,22 +237,20 @@ const CitizenAnalytics = () => {
               {currentData
                 .sort((a, b) => b.count - a.count) 
                 .map((item, index) => (
-                <tr key={index} style={{ 
-                  backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9' 
-                }}>
-                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                <tr key={index} >
+                  <td style={{ padding: '12px', border: '1px ' }}>
                     {item.name}
                   </td>
-                  <td style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'center',fontWeight: 'bold',}}>
+                  <td style={{ padding: '12px', border: '1px '}}>
                     {item.count}
                   </td>
-                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                  <td style={{ padding: '12px', border: '1px '}}>
                     {item.parent}
                   </td>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></center>
         </div>
       </div>
 
