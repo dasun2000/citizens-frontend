@@ -174,9 +174,6 @@ const CitizenAnalytics = () => {
           </BarChart>
         </ResponsiveContainer>
       
-        <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>
-          
-        </h3>
         
         <div style={{ overflowX: 'auto' }}>
           <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
