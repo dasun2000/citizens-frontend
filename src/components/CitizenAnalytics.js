@@ -103,6 +103,10 @@ const CitizenAnalytics = () => {
     setLoading(false);
   };
 
+  const handleTabChange=(tabName)=>{
+    setActiveTab(tabName);
+  }
+
   if (loading) {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -130,28 +134,28 @@ const CitizenAnalytics = () => {
       </h2>
      <div style={{ display: 'flex', gap: '10px',marginBottom: '20px',justifyContent: 'center',flexWrap: 'wrap'}}>
         <button 
-          onClick={() => setActiveTab('country')}
+          onClick={() => handleTabChange('country')}
           style={{
             padding: '10px 20px',backgroundColor: activeTab === 'country' ? 'blue' : '#B2BEB5',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
           Countries ({data.countries.length})
         </button>
         
         <button 
-          onClick={() => setActiveTab('territory')}
+          onClick={() => handleTabChange('territory')}
           style={{
             padding: '10px 20px',backgroundColor: activeTab === 'territory' ? 'blue' : '#B2BEB5',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
           Territories ({data.territories.length})
         </button>
         
         <button 
-          onClick={() => setActiveTab('district')}
+          onClick={() => handleTabChange('district')}
           style={{
             padding: '10px 20px',backgroundColor: activeTab === 'district' ? 'blue' : '#B2BEB5',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
           Districts ({data.districts.length})
         </button>
         
         <button 
-          onClick={() => setActiveTab('seat')}
+          onClick={() => handleTabChange('seat')}
           style={{
             padding: '10px 20px',backgroundColor: activeTab === 'seat' ? 'blue' : '#B2BEB5',border: '1px',borderRadius: '5px',cursor: 'pointer' }}>
           Seats ({data.seats.length})
@@ -177,7 +181,7 @@ const CitizenAnalytics = () => {
         </h3>
         
         <div style={{ overflowX: 'auto' }}>
-          <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
+        <center>  <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
           }}>
             <thead>
               <tr style={{ backgroundColor: '#f8f9fa' }}>
@@ -211,7 +215,7 @@ const CitizenAnalytics = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></center>
         </div>
       </div>
 
