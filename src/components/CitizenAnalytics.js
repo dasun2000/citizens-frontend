@@ -86,7 +86,7 @@ const CitizenAnalytics = () => {
         countryData.push({
           name: country.CountryName,
           count: countryTotal,
-          parent: ''
+          parent: 'Root'
         });
       }
 
@@ -167,7 +167,7 @@ const CitizenAnalytics = () => {
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={80}fontSize={10}/>
-            <YAxis allowDecimals={false} />
+            <YAxis />
             <Tooltip formatter={(value) => [value, 'Citizens']} />
             <Bar dataKey="count" fill="#000000" />
           </BarChart>
