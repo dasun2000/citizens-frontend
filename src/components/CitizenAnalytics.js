@@ -134,28 +134,28 @@ const CitizenAnalytics = () => {
         <button 
           onClick={() => setActiveTab('country')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue"}}>
           Countries ({data.countries.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('territory')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue"}}>
           Territories ({data.territories.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('district')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer'}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue"}}>
           Districts ({data.districts.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('seat')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer' }}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue" }}>
           Seats ({data.seats.length})
         </button>
       </div>
