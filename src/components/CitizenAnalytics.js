@@ -181,8 +181,7 @@ const CitizenAnalytics = () => {
         </h3>
         
         <div style={{ overflowX: 'auto' }}>
-        <center>  <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
-          }}>
+        <center>  <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px solid #111'}}>
             <thead>
               <tr style={{ backgroundColor: '#f8f9fa' }}>
                 <th style={{ padding: '12px', border: '1px ', textAlign: 'left' }}>
