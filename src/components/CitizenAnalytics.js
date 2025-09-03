@@ -1,54 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import axios from 'axios';
 
 const CitizenAnalytics = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    countries: [],
+    territories: [],
+    districts: [],
+    seats: []
+  });
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('country');
 
   const API_BASE_URL = "https://citizens-backend-production.up.railway.app";
 
   useEffect(() => {
-    loadData();
+    loadAllData();
   }, []);
 
-  const loadData = async () => {
+  const loadAllData = async () => {
     setLoading(true);
     try {
-      // Get all countries
+      // Get all countries first
       const countriesResponse = await axios.get(`${API_BASE_URL}/countries`);
       const countries = countriesResponse.data;
       
-      const result = [];
+      const countryData = [];
+      const territoryData = [];
+      const districtData = [];
+      const seatData = [];
 
-      // Count citizens for each country
+      // Loop through each country
       for (const country of countries) {
-        let totalCitizens = 0;
+        let countryTotal = 0;
         
-        try {
-          // Get territories for this country
-          const territories = await axios.get(`${API_BASE_URL}/territories/${country.ID}`);
+        // Get territories for this country
+        const territories = await axios.get(`${API_BASE_URL}/territories/${country.ID}`);
+        
+        for (const territory of territories.data) {
+          let territoryTotal = 0;
           
-          // For each territory, get districts and count citizens
-          for (const territory of territories.data) {
-            const districts = await axios.get(`${API_BASE_URL}/districts/${territory.ID}`);
+          // Get districts for this territory
+          const districts = await axios.get(`${API_BASE_URL}/districts/${territory.ID}`);
+          
+          for (const district of districts.data) {
+            // Get citizen count for this district
+            const citizens = await axios.get(`${API_BASE_URL}/citizens/district/${district.ID}`);
+            const districtCount = citizens.data.length;
+            territoryTotal += districtCount;
             
-            for (const district of districts.data) {
-              const citizens = await axios.get(`${API_BASE_URL}/citizens/district/${district.ID}`);
-              totalCitizens += citizens.data.length;
+            // Add district data
+            districtData.push({
+              name: district.DistrictName,
+              count: districtCount,
+              parent: `${territory.TerritoryName}, ${country.CountryName}`
+            });
+            
+            // Get seats for this district
+            const seats = await axios.get(`${API_BASE_URL}/seats/${district.ID}`);
+            
+            for (const seat of seats.data) {
+              const seatCitizens = await axios.get(`${API_BASE_URL}/citizens/seat/${seat.ID}`);
+              const seatCount = seatCitizens.data.length;
+              
+              // Add seat data
+              seatData.push({
+                name: seat.SeatDescption || `Seat ${seat.ID}`,
+                count: seatCount,
+                parent: `${district.DistrictName}, ${territory.TerritoryName}`
+              });
             }
           }
-        } catch (error) {
-          console.error(`Error for country ${country.CountryName}:`, error);
+          
+          countryTotal += territoryTotal;
+          
+          // Add territory data
+          territoryData.push({
+            name: territory.TerritoryName,
+            count: territoryTotal,
+            parent: country.CountryName
+          });
         }
         
-        result.push({
+        // Add country data
+        countryData.push({
           name: country.CountryName,
-          citizens: totalCitizens
+          count: countryTotal,
+          parent: 'Root'
         });
       }
 
-      setData(result);
+      setData({
+        countries: countryData,
+        territories: territoryData,
+        districts: districtData,
+        seats: seatData
+      });
+      
     } catch (error) {
       console.error('Error loading data:', error);
     }
@@ -58,78 +105,224 @@ const CitizenAnalytics = () => {
   if (loading) {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h2>Loading...</h2>
+        <h2>Loading Analytics...</h2>
+        <p>Counting citizens at all levels...</p>
       </div>
     );
   }
 
-  const totalCitizens = data.reduce((sum, item) => sum + item.citizens, 0);
+  const getCurrentData = () => {
+    switch(activeTab) {
+      case 'country': return data.countries;
+      case 'territory': return data.territories;
+      case 'district': return data.districts;
+      case 'seat': return data.seats;
+      default: return [];
+    }
+  };
+
+  const currentData = getCurrentData();
+  const totalCitizens = data.countries.reduce((sum, item) => sum + item.count, 0);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2 style={{ textAlign: 'center' }}>Citizen Analytics</h2>
+    <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
+        Full Citizen Count Analytics
+      </h2>
       
-      {/* Total Count */}
+      {/* Summary Cards */}
       <div style={{ 
-        textAlign: 'center', 
-        marginBottom: '30px', 
-        padding: '20px', 
-        backgroundColor: '#f0f0f0',
-        borderRadius: '8px'
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+        gap: '15px',
+        marginBottom: '30px'
       }}>
-        <h3>Total Citizens: {totalCitizens}</h3>
+        <div style={{ 
+          padding: '15px', 
+          backgroundColor: '#e3f2fd', 
+          borderRadius: '8px', 
+          textAlign: 'center' 
+        }}>
+          <h4 style={{ margin: '0 0 10px 0' }}>Total Citizens</h4>
+          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{totalCitizens}</div>
+        </div>
+        
+        <div style={{ 
+          padding: '15px', 
+          backgroundColor: '#f3e5f5', 
+          borderRadius: '8px', 
+          textAlign: 'center' 
+        }}>
+          <h4 style={{ margin: '0 0 10px 0' }}>Countries</h4>
+          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.countries.length}</div>
+        </div>
+        
+        <div style={{ 
+          padding: '15px', 
+          backgroundColor: '#e8f5e8', 
+          borderRadius: '8px', 
+          textAlign: 'center' 
+        }}>
+          <h4 style={{ margin: '0 0 10px 0' }}>Territories</h4>
+          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.territories.length}</div>
+        </div>
+        
+        <div style={{ 
+          padding: '15px', 
+          backgroundColor: '#fff3e0', 
+          borderRadius: '8px', 
+          textAlign: 'center' 
+        }}>
+          <h4 style={{ margin: '0 0 10px 0' }}>Districts</h4>
+          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.districts.length}</div>
+        </div>
+        
+        <div style={{ 
+          padding: '15px', 
+          backgroundColor: '#fce4ec', 
+          borderRadius: '8px', 
+          textAlign: 'center' 
+        }}>
+          <h4 style={{ margin: '0 0 10px 0' }}>Seats</h4>
+          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.seats.length}</div>
+        </div>
       </div>
 
-      {/* Chart */}
-      <div style={{ marginBottom: '30px' }}>
-        <h3 style={{ textAlign: 'center' }}>Citizens by Country</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="citizens" fill="#8884d8" />
-          </BarChart>
-        </ResponsiveContainer>
+      {/* Tab Navigation */}
+      <div style={{ 
+        display: 'flex', 
+        gap: '10px', 
+        marginBottom: '20px',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+      }}>
+        <button 
+          onClick={() => setActiveTab('country')}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: activeTab === 'country' ? '#007bff' : '#f8f9fa',
+            color: activeTab === 'country' ? 'white' : '#333',
+            border: '1px solid #ddd',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Countries ({data.countries.length})
+        </button>
+        
+        <button 
+          onClick={() => setActiveTab('territory')}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: activeTab === 'territory' ? '#007bff' : '#f8f9fa',
+            color: activeTab === 'territory' ? 'white' : '#333',
+            border: '1px solid #ddd',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Territories ({data.territories.length})
+        </button>
+        
+        <button 
+          onClick={() => setActiveTab('district')}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: activeTab === 'district' ? '#007bff' : '#f8f9fa',
+            color: activeTab === 'district' ? 'white' : '#333',
+            border: '1px solid #ddd',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Districts ({data.districts.length})
+        </button>
+        
+        <button 
+          onClick={() => setActiveTab('seat')}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: activeTab === 'seat' ? '#007bff' : '#f8f9fa',
+            color: activeTab === 'seat' ? 'white' : '#333',
+            border: '1px solid #ddd',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Seats ({data.seats.length})
+        </button>
       </div>
 
-      {/* Simple Table */}
+      {/* Data Table */}
       <div>
-        <h3 style={{ textAlign: 'center' }}>Country Breakdown</h3>
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '0 auto' }}>
-          <thead>
-            <tr style={{ backgroundColor: '#f5f5f5' }}>
-              <th style={{ padding: '10px', border: '1px solid #ddd' }}>Country</th>
-              <th style={{ padding: '10px', border: '1px solid #ddd' }}>Citizens</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{item.name}</td>
-                <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
-                  {item.citizens}
-                </td>
+        <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>
+          {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Level Data
+        </h3>
+        
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ 
+            width: '100%', 
+            borderCollapse: 'collapse',
+            backgroundColor: 'white',
+            border: '1px solid #ddd'
+          }}>
+            <thead>
+              <tr style={{ backgroundColor: '#f8f9fa' }}>
+                <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'left' }}>
+                  {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Name
+                </th>
+                <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'center' }}>
+                  Citizens Count
+                </th>
+                <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'left' }}>
+                  Location
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentData
+                .sort((a, b) => b.count - a.count) // Sort by highest count first
+                .map((item, index) => (
+                <tr key={index} style={{ 
+                  backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9' 
+                }}>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    {item.name}
+                  </td>
+                  <td style={{ 
+                    padding: '12px', 
+                    border: '1px solid #ddd', 
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    color: item.count > 0 ? '#28a745' : '#6c757d'
+                  }}>
+                    {item.count}
+                  </td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    {item.parent}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Refresh Button */}
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <button 
-          onClick={loadData}
+          onClick={loadAllData}
           style={{
             padding: '10px 20px',
-            backgroundColor: '#007bff',
+            backgroundColor: '#28a745',
             color: 'white',
             border: 'none',
             borderRadius: '5px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            fontSize: '14px'
           }}
         >
-          Refresh Data
+          🔄 Refresh All Data
         </button>
       </div>
     </div>
