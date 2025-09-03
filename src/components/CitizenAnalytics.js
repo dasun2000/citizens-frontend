@@ -107,7 +107,6 @@ const CitizenAnalytics = () => {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>
         <h2>Loading Analytics...</h2>
-        <p>Counting citizens at all levels...</p>
       </div>
     );
   }
@@ -130,7 +129,7 @@ const CitizenAnalytics = () => {
       <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
         Full Citizen Count Analytics
       </h2>
-      <div style={{ display: 'flex', gap: '10px',marginBottom: '20px',justifyContent: 'center',flexWrap: 'wrap'}}>
+      <div style={{ display: 'flex', gap: '10px',marginBottom: '20px',justifyContent: 'center'}}>
         <button 
           onClick={() => setActiveTab('country')}
           style={{
