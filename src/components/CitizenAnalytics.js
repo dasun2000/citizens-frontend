@@ -253,6 +253,68 @@ const CitizenAnalytics = () => {
         </button>
       </div>
 
+      {/* Charts Section */}
+      {currentData.length > 0 && (
+        <div style={{ marginBottom: '30px' }}>
+          <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>
+            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Charts
+          </h3>
+          
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: currentData.length <= 8 ? 'repeat(auto-fit, minmax(400px, 1fr))' : '1fr',
+            gap: '30px',
+            marginBottom: '20px'
+          }}>
+            {/* Bar Chart */}
+            <div>
+              <h4 style={{ textAlign: 'center', marginBottom: '15px' }}>Bar Chart</h4>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={currentData.slice(0, 10)}>
+                  <XAxis 
+                    dataKey="name" 
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={80}
+                    fontSize={10}
+                  />
+                  <YAxis />
+                  <Tooltip formatter={(value) => [value, 'Citizens']} />
+                  <Bar dataKey="count" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Pie Chart - Only show if 8 or fewer items */}
+            {currentData.length <= 8 && (
+              <div>
+                <h4 style={{ textAlign: 'center', marginBottom: '15px' }}>Pie Chart</h4>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={currentData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={(entry) => entry.count > 0 ? `${entry.name}: ${entry.count}` : ''}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="count"
+                    >
+                      {currentData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [value, 'Citizens']} />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Data Table */}
       <div>
         <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>
