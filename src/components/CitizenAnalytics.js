@@ -93,32 +93,9 @@ const CitizenAnalytics = () => {
 
   if (loading) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        height: '50vh',
-        textAlign: 'center' 
-      }}>
-        <div style={{
-          width: '40px',
-          height: '40px',
-          border: '4px solid #f3f3f3',
-          borderTop: '4px solid #3498db',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite',
-          marginBottom: '20px'
-        }}></div>
-        <h2 style={{ margin: '0 0 10px 0', color: '#333' }}>Loading Analytics...</h2>
-        <p style={{ margin: 0, color: '#666' }}>Counting citizens at all levels...</p>
-        
-        <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `}</style>
+      <div style={{ padding: '20px', textAlign: 'center' }}>
+        <h2>Loading Analytics...</h2>
+        <p>Counting citizens at all levels...</p>
       </div>
     );
   }
@@ -137,257 +114,161 @@ const CitizenAnalytics = () => {
   const totalCitizens = data.countries.reduce((sum, item) => sum + item.count, 0);
 
   return (
-    <div style={{ 
-      padding: '20px', 
-      maxWidth: '1200px', 
-      margin: '0 auto', 
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: '#f8f9fa',
-      minHeight: '100vh'
-    }}>
-      {/* Header */}
-      <div style={{ 
-        textAlign: 'center', 
-        marginBottom: '30px',
-        padding: '20px',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      }}>
-        <h1 style={{ 
-          margin: '0 0 10px 0', 
-          color: '#2c3e50',
-          fontSize: '28px'
-        }}>Citizen Analytics Dashboard</h1>
-        <p style={{ 
-          margin: 0, 
-          color: '#7f8c8d',
-          fontSize: '16px'
-        }}>Comprehensive overview of citizen distribution</p>
-      </div>
+    <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
+        Citizen Analytics
+      </h2>
       
       {/* Summary Cards */}
       <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-        gap: '15px', 
-        marginBottom: '30px'
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: '10px', 
+        marginBottom: '20px', 
+        justifyContent: 'center' 
       }}>
         <div style={{ 
-          padding: '20px', 
-          backgroundColor: 'white', 
+          padding: '15px', 
+          backgroundColor: '#f0f8ff', 
           borderRadius: '8px', 
           textAlign: 'center',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          borderLeft: '4px solid #e74c3c'
+          flex: '1',
+          minWidth: '150px'
         }}>
-          <h3 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#7f8c8d' }}>Total Citizens</h3>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2c3e50' }}>{totalCitizens.toLocaleString()}</div>
+          <h4 style={{ margin: '0 0 5px 0', fontSize: '14px' }}>Total Citizens</h4>
+          <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{totalCitizens}</div>
         </div>
         
         <div style={{ 
-          padding: '20px', 
-          backgroundColor: 'white', 
+          padding: '15px', 
+          backgroundColor: '#f0f8ff', 
           borderRadius: '8px', 
           textAlign: 'center',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          borderLeft: '4px solid #3498db'
+          flex: '1',
+          minWidth: '150px'
         }}>
-          <h3 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#7f8c8d' }}>Countries</h3>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2c3e50' }}>{data.countries.length}</div>
+          <h4 style={{ margin: '0 0 5px 0', fontSize: '14px' }}>Countries</h4>
+          <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{data.countries.length}</div>
         </div>
         
         <div style={{ 
-          padding: '20px', 
-          backgroundColor: 'white', 
+          padding: '15px', 
+          backgroundColor: '#f0f8ff', 
           borderRadius: '8px', 
           textAlign: 'center',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          borderLeft: '4px solid #2ecc71'
+          flex: '1',
+          minWidth: '150px'
         }}>
-          <h3 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#7f8c8d' }}>Territories</h3>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2c3e50' }}>{data.territories.length}</div>
+          <h4 style={{ margin: '0 0 5px 0', fontSize: '14px' }}>Territories</h4>
+          <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{data.territories.length}</div>
         </div>
         
         <div style={{ 
-          padding: '20px', 
-          backgroundColor: 'white', 
+          padding: '15px', 
+          backgroundColor: '#f0f8ff', 
           borderRadius: '8px', 
           textAlign: 'center',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          borderLeft: '4px solid #f39c12'
+          flex: '1',
+          minWidth: '150px'
         }}>
-          <h3 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#7f8c8d' }}>Districts</h3>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2c3e50' }}>{data.districts.length}</div>
-        </div>
-        
-        <div style={{ 
-          padding: '20px', 
-          backgroundColor: 'white', 
-          borderRadius: '8px', 
-          textAlign: 'center',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          borderLeft: '4px solid #9b59b6'
-        }}>
-          <h3 style={{ margin: '0 0 10px 0', fontSize: '14px', color: '#7f8c8d' }}>Seats</h3>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#2c3e50' }}>{data.seats.length}</div>
+          <h4 style={{ margin: '0 0 5px 0', fontSize: '14px' }}>Districts</h4>
+          <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{data.districts.length}</div>
         </div>
       </div>
 
       {/* Tab Navigation */}
       <div style={{ 
         display: 'flex', 
-        gap: '0', 
+        gap: '5px',
         marginBottom: '20px',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        overflow: 'hidden',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+        justifyContent: 'center',
+        flexWrap: 'wrap'
       }}>
         <button 
           onClick={() => setActiveTab('country')}
           style={{
-            padding: '12px 20px',
-            backgroundColor: activeTab === 'country' ? '#3498db' : 'white',
+            padding: '8px 15px',
+            backgroundColor: activeTab === 'country' ? '#4a7aff' : '#e0e0e0',
             color: activeTab === 'country' ? 'white' : '#333',
             border: 'none',
-            flex: '1',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            transition: 'all 0.3s ease'
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}>
-          Countries ({data.countries.length})
+          Countries
         </button>
         
         <button 
           onClick={() => setActiveTab('territory')}
           style={{
-            padding: '12px 20px',
-            backgroundColor: activeTab === 'territory' ? '#3498db' : 'white',
+            padding: '8px 15px',
+            backgroundColor: activeTab === 'territory' ? '#4a7aff' : '#e0e0e0',
             color: activeTab === 'territory' ? 'white' : '#333',
             border: 'none',
-            flex: '1',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            transition: 'all 0.3s ease'
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}>
-          Territories ({data.territories.length})
+          Territories
         </button>
         
         <button 
           onClick={() => setActiveTab('district')}
           style={{
-            padding: '12px 20px',
-            backgroundColor: activeTab === 'district' ? '#3498db' : 'white',
+            padding: '8px 15px',
+            backgroundColor: activeTab === 'district' ? '#4a7aff' : '#e0e0e0',
             color: activeTab === 'district' ? 'white' : '#333',
             border: 'none',
-            flex: '1',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            transition: 'all 0.3s ease'
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}>
-          Districts ({data.districts.length})
+          Districts
         </button>
         
         <button 
           onClick={() => setActiveTab('seat')}
           style={{
-            padding: '12px 20px',
-            backgroundColor: activeTab === 'seat' ? '#3498db' : 'white',
+            padding: '8px 15px',
+            backgroundColor: activeTab === 'seat' ? '#4a7aff' : '#e0e0e0',
             color: activeTab === 'seat' ? 'white' : '#333',
             border: 'none',
-            flex: '1',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            transition: 'all 0.3s ease'
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}>
-          Seats ({data.seats.length})
+          Seats
         </button>
       </div>
 
-      {/* Chart Section */}
-      <div style={{ 
-        marginBottom: '30px', 
-        backgroundColor: 'white', 
-        padding: '20px', 
-        borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      }}>
-        <h2 style={{ 
-          textAlign: 'center', 
-          marginBottom: '20px', 
-          color: '#2c3e50',
-          fontSize: '20px'
-        }}>
+      {/* Chart */}
+      <div style={{ marginBottom: '30px', backgroundColor: 'white', padding: '15px', borderRadius: '8px' }}>
+        <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>
           {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Distribution
-        </h2>
-        <ResponsiveContainer width="100%" height={300}>
+        </h3>
+        <ResponsiveContainer width="100%" height={250}>
           <BarChart data={currentData.slice(0, 10)} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-            <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} fontSize={12} />
+            <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} fontSize={10}/>
             <YAxis />
-            <Tooltip 
-              formatter={(value) => [value, 'Citizens']} 
-              contentStyle={{ 
-                borderRadius: '6px', 
-                border: 'none', 
-                boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-              }}
-            />
-            <Bar dataKey="count" fill="#3498db" radius={[4, 4, 0, 0]} />
+            <Tooltip formatter={(value) => [value, 'Citizens']} />
+            <Bar dataKey="count" fill="#4a7aff" />
           </BarChart>
         </ResponsiveContainer>
       </div>
-
+      
       {/* Data Table */}
-      <div style={{ 
-        marginBottom: '30px', 
-        backgroundColor: 'white', 
-        padding: '20px', 
-        borderRadius: '8px',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      }}>
-        <h2 style={{ 
-          textAlign: 'center', 
-          marginBottom: '20px', 
-          color: '#2c3e50',
-          fontSize: '20px'
-        }}>
+      <div style={{ marginBottom: '30px', backgroundColor: 'white', padding: '15px', borderRadius: '8px' }}>
+        <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>
           {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Details
-        </h2>
+        </h3>
         
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ 
-            width: '100%', 
-            borderCollapse: 'collapse',
-            fontSize: '14px'
-          }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ backgroundColor: '#f8f9fa' }}>
-                <th style={{ 
-                  padding: '12px', 
-                  textAlign: 'left', 
-                  fontWeight: 'bold',
-                  color: '#2c3e50',
-                  borderBottom: '2px solid #eee'
-                }}>
+              <tr style={{ backgroundColor: '#f5f5f5' }}>
+                <th style={{ padding: '10px', borderBottom: '1px solid #ddd', textAlign: 'left' }}>
                   {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Name
                 </th>
-                <th style={{ 
-                  padding: '12px', 
-                  textAlign: 'center', 
-                  fontWeight: 'bold',
-                  color: '#2c3e50',
-                  borderBottom: '2px solid #eee'
-                }}>
-                  Citizens Count
+                <th style={{ padding: '10px', borderBottom: '1px solid #ddd', textAlign: 'center' }}>
+                  Citizens
                 </th>
-                <th style={{ 
-                  padding: '12px', 
-                  textAlign: 'left', 
-                  fontWeight: 'bold',
-                  color: '#2c3e50',
-                  borderBottom: '2px solid #eee'
-                }}>
+                <th style={{ padding: '10px', borderBottom: '1px solid #ddd', textAlign: 'left' }}>
                   Location
                 </th>
               </tr>
@@ -397,20 +278,15 @@ const CitizenAnalytics = () => {
                 .sort((a, b) => b.count - a.count)
                 .map((item, index) => (
                 <tr key={index} style={{ 
-                  borderBottom: '1px solid #eee'
+                  backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9' 
                 }}>
-                  <td style={{ padding: '12px' }}>
+                  <td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>
                     {item.name}
                   </td>
-                  <td style={{ 
-                    padding: '12px', 
-                    textAlign: 'center', 
-                    fontWeight: 'bold',
-                    color: '#2c3e50'
-                  }}>
-                    {item.count.toLocaleString()}
+                  <td style={{ padding: '10px', borderBottom: '1px solid #eee', textAlign: 'center', fontWeight: 'bold' }}>
+                    {item.count}
                   </td>
-                  <td style={{ padding: '12px' }}>
+                  <td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>
                     {item.parent}
                   </td>
                 </tr>
@@ -425,20 +301,13 @@ const CitizenAnalytics = () => {
         <button 
           onClick={loadAllData}
           style={{
-            padding: '12px 24px',
-            backgroundColor: '#3498db',
+            padding: '10px 20px',
+            backgroundColor: '#4a7aff',
             color: 'white',
             border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            fontSize: '16px',
-            transition: 'background-color 0.3s ease',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
-        >
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}>
           Refresh Data
         </button>
       </div>
