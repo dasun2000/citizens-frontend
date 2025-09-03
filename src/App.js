@@ -1,14 +1,15 @@
+
 import React, { useState } from "react";
 import CitizenForm from "./components/CitizenForm";
 import CitizensList from "./components/CitizensList";
 import LoginForm from './components/LoginForm';
-import CitizenAnalytics from './components/CitizenAnalytics'; // ADD THIS LINE
+
+
 
 function App() {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedSeat,setSelectedSeat]=useState("");
   const [isLoggedIn,setLoggedIn]=useState(false);
-  const [showAnalytics, setShowAnalytics] = useState(false); // ADD THIS LINE
   
 
   const handleDistrictChange=(districtID)=>{
@@ -29,7 +30,6 @@ function App() {
     setLoggedIn(false);
     setSelectedDistrict("");
     setSelectedSeat("");
-    setShowAnalytics(false); // ADD THIS LINE
   }
  
 
@@ -40,33 +40,13 @@ function App() {
   return (
     <div className="app-container">
       <h1><center>Population Management System</center></h1>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}> {/* MODIFY THIS DIV */}
-        <button 
-          onClick={() => setShowAnalytics(!showAnalytics)}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: showAnalytics ? "#28a745" : "#007bff", 
-            color: "white",
-            borderRadius: "5px",
-            cursor: "pointer",
-            border: "none"
-          }}
-        >
-          {showAnalytics ? "Show Form" : "Show Analytics"}
-        </button>
-        
-        <button onClick={handleLogout} style={{padding :"8px 16px",backgroundColor:"red", color:"white",borderRadius:"5px",cursor:"pointer"}}>Logout</button>
+      <div >
+          <button onClick={handleLogout} style={{pading :"8px 16px",backgroundColor:"red", color:"white",borderRadius:"5px",cursor:"pointer"}}>Logout</button>
       </div>
       
-      {/* ADD THIS PART */}
-      {showAnalytics ? (
-        <CitizenAnalytics />
-      ) : (
-        <>
-          <CitizenForm onDistrictChange={handleDistrictChange} onSeatChange={handleSeatChange}/>
-          <CitizensList districtID={selectedDistrict} seatID={selectedSeat}/>
-        </>
-      )}
+      <CitizenForm onDistrictChange={handleDistrictChange} onSeatChange={handleSeatChange}/>
+
+      <CitizensList districtID={selectedDistrict} seatID={selectedSeat}/>
     </div>
   );
 }
