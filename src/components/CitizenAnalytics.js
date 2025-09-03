@@ -134,28 +134,28 @@ const CitizenAnalytics = () => {
         <button 
           onClick={() => setActiveTab('country')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue"}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='country'?"vlue":"#B2BEB5"}}>
           Countries ({data.countries.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('territory')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue"}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='territory'?"vlue":"#B2BEB5"}}>
           Territories ({data.territories.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('district')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue"}}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='district'?"vlue":"#B2BEB5"}}>
           Districts ({data.districts.length})
         </button>
         
         <button 
           onClick={() => setActiveTab('seat')}
           style={{
-            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:"blue" }}>
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='seat'?"vlue":"#B2BEB5"}}>
           Seats ({data.seats.length})
         </button>
       </div>
