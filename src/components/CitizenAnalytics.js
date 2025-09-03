@@ -130,45 +130,6 @@ const CitizenAnalytics = () => {
       <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
         Full Citizen Count Analytics
       </h2>
-      
-      
-      <div style={{ 
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px',marginBottom: '30px'
-      }}>
-        <div style={{ padding: '15px', backgroundColor: '#e3f2fd',  borderRadius: '8px', textAlign: 'center' 
-        }}>
-          <h4 style={{ margin: '0 0 10px 0' }}>Total Citizens</h4>
-          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{totalCitizens}</div>
-        </div>
-        
-        <div style={{ padding: '15px', backgroundColor: '#f3e5f5', borderRadius: '8px', textAlign: 'center' 
-        }}>
-          <h4 style={{ margin: '0 0 10px 0' }}>Countries</h4>
-          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.countries.length}</div>
-        </div>
-        
-        <div style={{ padding: '15px', backgroundColor: '#e8f5e8', borderRadius: '8px', textAlign: 'center' 
-        }}>
-          <h4 style={{ margin: '0 0 10px 0' }}>Territories</h4>
-          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.territories.length}</div>
-        </div>
-        
-        <div style={{ 
-          padding: '15px',  backgroundColor: '#fff3e0', borderRadius: '8px', textAlign: 'center' 
-        }}>
-          <h4 style={{ margin: '0 0 10px 0' }}>Districts</h4>
-          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.districts.length}</div>
-        </div>
-        
-        <div style={{ 
-          padding: '15px', backgroundColor: '#fce4ec',borderRadius: '8px', textAlign: 'center' 
-        }}>
-          <h4 style={{ margin: '0 0 10px 0' }}>Seats</h4>
-          <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{data.seats.length}</div>
-        </div>
-      </div>
-
-      
       <div style={{ display: 'flex', gap: '10px',marginBottom: '20px',justifyContent: 'center',flexWrap: 'wrap'}}>
         <button 
           onClick={() => setActiveTab('country')}
