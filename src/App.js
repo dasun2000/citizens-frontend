@@ -45,7 +45,7 @@ function App() {
       <h1><center>Population Management System</center></h1>
       <div >
         <button onClick={()=>setShowAnalytics(!showAnalytics)} style={{padding:"8px 10px", backgroundColor:"green",color:"white",borderRadius:"5px", cursor:"pointer"}}>
-          {showAnalytics ? "show redistation form": "show analytics dashboard" }
+          {showAnalytics ? "show registration form": "show analytics dashboard" }
         </button>
           <button onClick={handleLogout} style={{pading :"8px 16px",backgroundColor:"red", color:"white",borderRadius:"5px",cursor:"pointer"}}>Logout</button>
       </div>
