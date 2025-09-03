@@ -165,7 +165,7 @@ const CitizenAnalytics = () => {
           {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Citizens Chart
         </h3>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={currentData.slice(0, 10)} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+          <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={80}fontSize={10}/>
             <YAxis allowDecimals={false} />
             <Tooltip formatter={(value) => [value, 'Citizens']} />
