@@ -2,69 +2,84 @@ import React, { useState } from "react";
 import CitizenForm from "./components/CitizenForm";
 import CitizensList from "./components/CitizensList";
 import LoginForm from './components/LoginForm';
-import CitizenAnalytics from './components/CitizenAnalytics'; // ADD THIS LINE
+import CitizenAnalytics from './components/CitizenAnalytics';
 
 function App() {
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedSeat,setSelectedSeat]=useState("");
-  const [isLoggedIn,setLoggedIn]=useState(false);
-  const [showAnalytics, setShowAnalytics] = useState(false); // ADD THIS LINE
+  const [selectedSeat, setSelectedSeat] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
   
 
-  const handleDistrictChange=(districtID)=>{
+  const handleDistrictChange = (districtID) => {
     setSelectedDistrict(districtID);
-    if(districtID!==selectedDistrict)
-    {
+    if (districtID !== selectedDistrict) {
       setSelectedSeat("");
     }
   };
-  const handleSeatChange=(seatID)=>{
+
+  const handleSeatChange = (seatID) => {
     setSelectedSeat(seatID);
   };
-  const handleLogin=(loginStatus)=>{
+
+  const handleLogin = (loginStatus) => {
     setLoggedIn(loginStatus);
-    
   };
-  const handleLogout=()=>{
+
+  const handleLogout = () => {
     setLoggedIn(false);
     setSelectedDistrict("");
     setSelectedSeat("");
-    setShowAnalytics(false); // ADD THIS LINE
+    setShowAnalytics(false);
   }
  
 
-  if(!isLoggedIn){
-    return <LoginForm onLogin={handleLogin}/>
+  if (!isLoggedIn) {
+    return <LoginForm onLogin={handleLogin} />
   }
 
   return (
     <div className="app-container">
       <h1><center>Population Management System</center></h1>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}> {/* MODIFY THIS DIV */}
+      
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
         <button 
           onClick={() => setShowAnalytics(!showAnalytics)}
           style={{
-            padding: "8px 16px",
+            padding: "10px 20px",
             backgroundColor: showAnalytics ? "#28a745" : "#007bff", 
             color: "white",
             borderRadius: "5px",
             cursor: "pointer",
-            border: "none"
+            border: "none",
+            fontSize: "14px"
           }}
         >
-          {showAnalytics ? "Show Form" : "Show Analytics"}
+          {showAnalytics ? "📝 Show Registration Form" : "📊 Show Analytics Dashboard"}
         </button>
         
-        <button onClick={handleLogout} style={{padding :"8px 16px",backgroundColor:"red", color:"white",borderRadius:"5px",cursor:"pointer"}}>Logout</button>
+        <button 
+          onClick={handleLogout} 
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "red", 
+            color: "white",
+            borderRadius: "5px",
+            cursor: "pointer",
+            border: "none",
+            fontSize: "14px"
+          }}
+        >
+          🚪 Logout
+        </button>
       </div>
       
-      {/* ADD THIS PART */}
       {showAnalytics ? (
         <CitizenAnalytics />
       ) : (
         <>
-          <CitizenForm onDistrictChange={handleDistrictChange} onSeatChange={handleSeatChange}/>
-          <CitizensList districtID={selectedDistrict} seatID={selectedSeat}/>
+          <CitizenForm onDistrictChange={handleDistrictChange} onSeatChange={handleSeatChange} />
+          <CitizensList districtID={selectedDistrict} seatID={selectedSeat} />
         </>
       )}
     </div>
