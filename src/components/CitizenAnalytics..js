@@ -383,11 +383,8 @@ const CitizenAnalytics = () => {
             borderRadius: '6px',
             cursor: 'pointer',
             fontSize: '14px',
-            fontWeight: '500',
-            transition: 'background-color 0.2s'
+            fontWeight: '500'
           }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#218838'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#28a745'}
         >
           Refresh Data
         </button>
