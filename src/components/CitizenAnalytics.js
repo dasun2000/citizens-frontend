@@ -86,7 +86,7 @@ const CitizenAnalytics = () => {
         countryData.push({
           name: country.CountryName,
           count: countryTotal,
-          parent: 'Root'
+          parent: ''
         });
       }
 
