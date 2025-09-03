@@ -127,6 +127,7 @@ const CitizenAnalytics = () => {
     return (
       <div style={{ padding: '20px', textAlign: 'center' }}>
         <h2>Loading Analytics...</h2>
+<<<<<<< HEAD
         <p>Please wait while we load all data...</p>
       </div>
     );
@@ -150,6 +151,8 @@ const CitizenAnalytics = () => {
         >
           Retry
         </button>
+=======
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
       </div>
     );
   }
@@ -172,6 +175,7 @@ const CitizenAnalytics = () => {
       <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
         Full Citizen Count Analytics
       </h2>
+<<<<<<< HEAD
       
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', justifyContent: 'center' }}>
         <button 
@@ -185,12 +189,20 @@ const CitizenAnalytics = () => {
             color: activeTab === 'country' ? 'white' : 'black'
           }}
         >
+=======
+      <div style={{ display: 'flex', gap: '10px',marginBottom: '20px',justifyContent: 'center'}}>
+        <button type="button"
+          onClick={() => setActiveTab('country')}
+          style={{
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='country'?"blue":"#B2BEB5"}}>
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
           Countries ({data.countries.length})
         </button>
         
-        <button 
+        <button type="button"
           onClick={() => setActiveTab('territory')}
           style={{
+<<<<<<< HEAD
             padding: '10px 20px',
             border: '1px solid #ccc',
             borderRadius: '5px',
@@ -199,12 +211,16 @@ const CitizenAnalytics = () => {
             color: activeTab === 'territory' ? 'white' : 'black'
           }}
         >
+=======
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='territory'?"blue":"#B2BEB5"}}>
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
           Territories ({data.territories.length})
         </button>
         
-        <button 
+        <button type="button"
           onClick={() => setActiveTab('district')}
           style={{
+<<<<<<< HEAD
             padding: '10px 20px',
             border: '1px solid #ccc',
             borderRadius: '5px',
@@ -213,12 +229,16 @@ const CitizenAnalytics = () => {
             color: activeTab === 'district' ? 'white' : 'black'
           }}
         >
+=======
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='district'?"blue":"#B2BEB5"}}>
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
           Districts ({data.districts.length})
         </button>
         
-        <button 
+        <button type="button"
           onClick={() => setActiveTab('seat')}
           style={{
+<<<<<<< HEAD
             padding: '10px 20px',
             border: '1px solid #ccc',
             borderRadius: '5px',
@@ -227,6 +247,9 @@ const CitizenAnalytics = () => {
             color: activeTab === 'seat' ? 'white' : 'black'
           }}
         >
+=======
+            padding: '10px 20px',border: '1px ',borderRadius: '5px',cursor: 'pointer',backgroundColor:activeTab==='seat'?"blue":"#B2BEB5"}}>
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
           Seats ({data.seats.length})
         </button>
       </div>
@@ -237,12 +260,17 @@ const CitizenAnalytics = () => {
         </h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+<<<<<<< HEAD
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} fontSize={10}/>
+=======
+            <XAxis dataKey="name" angle={-45} textAnchor="end" height={80}fontSize={10}/>
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
             <YAxis />
             <Tooltip formatter={(value) => [value, 'Citizens']} />
             <Bar dataKey="count" fill="#000000" />
           </BarChart>
         </ResponsiveContainer>
+<<<<<<< HEAD
       </div>
 
       <div style={{ overflowX: 'auto' }}>
@@ -269,9 +297,38 @@ const CitizenAnalytics = () => {
                     {item.name}
                   </td>
                   <td style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'center' }}>
+=======
+      
+        
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{borderCollapse: 'collapse',backgroundColor: 'white',border: '1px'
+          }}>
+            <thead>
+              <tr style={{ backgroundColor: '#f8f9fa' }}>
+                <th style={{ padding: '12px', border: '1px ', textAlign: 'left' }}>
+                  {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Name
+                </th>
+                <th style={{ padding: '12px', border: '1px ', textAlign: 'center' }}>
+                  Citizens Count
+                </th>
+                <th style={{ padding: '12px', border: '1px ', textAlign: 'left' }}>
+                  Location
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentData
+                .sort((a, b) => b.count - a.count) 
+                .map((item, index) => (
+                <tr key={index} >
+                  <td style={{ padding: '12px', border: '1px '}}>
+                    {item.name}
+                  </td>
+                  <td style={{ padding: '12px', border: '1px '}}>
+>>>>>>> fedf36d3699f6eb1deeff61795bc997aa88bebd7
                     {item.count}
                   </td>
-                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                  <td style={{ padding: '12px', border: '1px '}}>
                     {item.parent}
                   </td>
                 </tr>
@@ -281,7 +338,7 @@ const CitizenAnalytics = () => {
       </div>
 
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <button 
+        <button type="button"
           onClick={loadAllData}
           style={{
             padding: '10px 20px',
