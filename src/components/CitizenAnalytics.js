@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  ResponsiveContainer,
+  BarChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Bar
+} from 'recharts';
 
 const CitizenAnalytics = () => {
   const [data, setData] = useState({
