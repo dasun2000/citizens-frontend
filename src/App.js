@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CitizenForm from "./components/CitizenForm";
 import CitizensList from "./components/CitizensList";
 import LoginForm from './components/LoginForm';
-import CitizenAnalytics from "./components/CitizenAnalytics ";
+import CitizenAnalytics from "./components/CitizenAnalytics";
 
 
 
