@@ -196,9 +196,9 @@ const CitizenAnalytics = () => {
               </tr>
             </thead>
             <tbody>
-              {currentData
+                {[...currentData]
                 .sort((a, b) => b.count - a.count) 
-                .map((item, index) => (
+                 .map((item, index) => (
                 <tr key={index} style={{ 
                   backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9' 
                 }}>

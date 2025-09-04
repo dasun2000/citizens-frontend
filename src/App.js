@@ -1,9 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CitizenForm from "./components/CitizenForm";
 import CitizensList from "./components/CitizensList";
 import LoginForm from './components/LoginForm';
-import CitizenAnalytics from './components/CitizenAnalytics';
+import CitizenAnalytics from "./components/CitizenAnalytics ";
+
 
 
 
@@ -13,6 +14,15 @@ function App() {
   const [isLoggedIn,setLoggedIn]=useState(false);
   const [showAnalytics,setShowAnalytics]=useState(false);
   
+
+
+  useEffect(()=>{
+    const saveLoggingStatus=localStorage.getItem('isLoggedIn');
+   
+    if (saveLoggingStatus==='true'){
+      setLoggedIn(true);
+    }
+  },[])
 
   const handleDistrictChange=(districtID)=>{
     setSelectedDistrict(districtID);
@@ -26,6 +36,10 @@ function App() {
   };
   const handleLogin=(loginStatus)=>{
     setLoggedIn(loginStatus);
+
+    if(loginStatus){
+      localStorage.setItem('isLoggedIn','true');
+    }
     
   };
   const handleLogout=()=>{
@@ -33,6 +47,8 @@ function App() {
     setSelectedDistrict("");
     setSelectedSeat("");
     setShowAnalytics(false);
+
+    localStorage.removeItem('isLoggedIn');
   }
  
 
@@ -63,3 +79,4 @@ function App() {
 }
 
 export default App;
+
